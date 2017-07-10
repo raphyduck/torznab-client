@@ -1,0 +1,28 @@
+Metrics/LineLength:
+  Max: 120
+
+Metrics/AbcSize:
+  Max: 18
+
+Metrics/MethodLength:
+  Max: 15
+  
+Layout/EmptyLinesAroundClassBody:
+  Enabled: false
+
+Layout/EmptyLinesAroundModuleBody:
+  Enabled: false
+  
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+# For tests
+Style/BlockDelimiters:
+  Enabled: false
+
+AllCops:
+  Exclude:
+    - 'Rakefile'
+    - 'Gemfile'
+    - 'torznab-client.gemspec'
+    - 'spec/spec_helper.rb'
