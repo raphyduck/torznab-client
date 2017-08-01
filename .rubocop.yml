@@ -6,18 +6,14 @@ Metrics/AbcSize:
 
 Metrics/MethodLength:
   Max: 15
-  
+
 Layout/EmptyLinesAroundClassBody:
   Enabled: false
 
 Layout/EmptyLinesAroundModuleBody:
   Enabled: false
-  
-Style/FrozenStringLiteralComment:
-  Enabled: false
 
-# For tests
-Style/BlockDelimiters:
+Style/FrozenStringLiteralComment:
   Enabled: false
 
 AllCops:
@@ -26,3 +22,11 @@ AllCops:
     - 'Gemfile'
     - 'torznab-client.gemspec'
     - 'spec/spec_helper.rb'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*.rb'
+
+Metrics/MethodLength:
+  Exclude:
+    - 'spec/**/*.rb'
