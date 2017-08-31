@@ -4,7 +4,7 @@ module Torznab
   module Client
     module Caps
       # Search type of the caps
-      class Search
+      class SearchMode
         attr_reader :type
         attr_reader :available
         attr_reader :supported_params

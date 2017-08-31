@@ -1,18 +1,18 @@
 require 'spec_helper'
-require 'torznab/client/caps/mappers/search_mapper'
+require 'torznab/client/caps/mappers/search_mode_mapper'
 
-describe Torznab::Client::Caps::Mappers::SearchMapper do
+describe Torznab::Client::Caps::Mappers::SearchModeMapper do
   XmlError = Torznab::Client::Errors::XmlError
 
   describe '.map' do
-    subject { Torznab::Client::Caps::Mappers::SearchMapper.map search_xml }
+    subject { Torznab::Client::Caps::Mappers::SearchModeMapper.map search_xml }
 
     let(:search) do
-      search = instance_double 'Torznab::Client::Caps::Search'
+      search = instance_double 'Torznab::Client::Caps::SearchMode'
       allow(search).to receive :type=
       allow(search).to receive :available=
       allow(search).to receive :supported_params=
-      allow(Torznab::Client::Caps::Search).to receive(:new).and_return(search)
+      allow(Torznab::Client::Caps::SearchMode).to receive(:new).and_return(search)
       search
     end
 

@@ -1,4 +1,4 @@
-require 'torznab/client/caps/search'
+require 'torznab/client/caps/search_mode'
 require 'torznab/client/errors/xml_error'
 require 'nokogiri'
 
@@ -7,21 +7,21 @@ module Torznab
     module Caps
       # Caps objects mapping
       module Mappers
-        # Search mapping
-        module SearchMapper
+        # SearchMode mapping
+        module SearchModeMapper
           class << self
-            # Map the data from a Nokogiri::XML::Element to a Search object
+            # Map the data from a Nokogiri::XML::Element to a SearchMode object
             # corresponding of a search node of the caps xml
             #
             # @param [Nokogiri::XML::Element] xml_element data from search node to map
-            # @return [Torznab::Client::Caps::Search] Mapped search object
+            # @return [Torznab::Client::Caps::SearchMode] Mapped search object
             # @raise [Torznab::Client::Errors::XmlError]
             def map(xml_element)
               unless xml_element.is_a? Nokogiri::XML::Element
                 raise XmlError, 'Provided object is not a Nokogiri::XML::Element'
               end
 
-              search = Search.new
+              search = SearchMode.new
               search.type = map_type xml_element
               search.available = map_available xml_element
               search.supported_params = map_supported_params xml_element

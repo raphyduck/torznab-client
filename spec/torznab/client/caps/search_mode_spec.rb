@@ -1,11 +1,11 @@
 require 'spec_helper'
-require 'torznab/client/caps/search'
+require 'torznab/client/caps/search_mode'
 
-describe Torznab::Client::Caps::Search do
+describe Torznab::Client::Caps::SearchMode do
   CapsError = Torznab::Client::Errors::CapsError
 
   let(:search) do
-    search = Torznab::Client::Caps::Search.new
+    search = Torznab::Client::Caps::SearchMode.new
     search.type = type if defined? type
     search.available = available if defined? available
     search.supported_params = supported_params if defined? supported_params
