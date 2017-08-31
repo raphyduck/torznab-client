@@ -12,5 +12,11 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 
+  # After hooks
+  config.after(:example, :end_with_subject) do
+    subject
+  end
+
+  # Include all support files
   Dir["./spec/support/**/*.rb"].sort.each { |f| require f }
 end
