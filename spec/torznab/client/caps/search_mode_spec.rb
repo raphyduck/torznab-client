@@ -4,16 +4,16 @@ require 'torznab/client/caps/search_mode'
 describe Torznab::Client::Caps::SearchMode do
   CapsError = Torznab::Client::Errors::CapsError
 
-  let(:search) do
-    search = Torznab::Client::Caps::SearchMode.new
-    search.type = type if defined? type
-    search.available = available if defined? available
-    search.supported_params = supported_params if defined? supported_params
-    search
+  let(:search_mode) do
+    search_mode = Torznab::Client::Caps::SearchMode.new
+    search_mode.type = type if defined? type
+    search_mode.available = available if defined? available
+    search_mode.supported_params = supported_params if defined? supported_params
+    search_mode
   end
 
   context '#type' do
-    subject { search.type }
+    subject { search_mode.type }
 
     ['search', 'tv-search', 'movie-search'].each do |type|
       context "eq #{type}" do
@@ -23,13 +23,13 @@ describe Torznab::Client::Caps::SearchMode do
     end
 
     context 'is invalid' do
-      let(:type) { 'other-search' }
-      it { expect { subject }.to raise_error CapsError, 'Type must be a valid caps search type' }
+      let(:type) { 'other-search_mode' }
+      it { expect { subject }.to raise_error CapsError, 'Type must be a valid caps search mode' }
     end
   end
 
   context '#available' do
-    subject { search.available }
+    subject { search_mode.available }
 
     [true, false].each do |available|
       context "eq #{available}" do
@@ -45,7 +45,7 @@ describe Torznab::Client::Caps::SearchMode do
   end
 
   context '#supported_params' do
-    subject { search.supported_params }
+    subject { search_mode.supported_params }
 
     context "when type isn't initialized" do
       let(:supported_params) { %w[q] }

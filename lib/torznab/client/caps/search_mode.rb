@@ -3,7 +3,7 @@ require 'torznab/client/errors/caps_error'
 module Torznab
   module Client
     module Caps
-      # Search type of the caps
+      # Search mode of the caps
       class SearchMode
         attr_reader :type
         attr_reader :available
@@ -29,7 +29,7 @@ module Torznab
 
         def type=(type)
           if type != 'search' && type != 'tv-search' && type != 'movie-search'
-            raise CapsError, 'Type must be a valid caps search type'
+            raise CapsError, 'Type must be a valid caps search mode'
           end
           @type = type
         end

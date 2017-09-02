@@ -21,11 +21,11 @@ module Torznab
                 raise XmlError, 'Provided object is not a Nokogiri::XML::Element'
               end
 
-              search = SearchMode.new
-              search.type = map_type xml_element
-              search.available = map_available xml_element
-              search.supported_params = map_supported_params xml_element
-              search
+              search_mode = SearchMode.new
+              search_mode.type = map_type xml_element
+              search_mode.available = map_available xml_element
+              search_mode.supported_params = map_supported_params xml_element
+              search_mode
             end
 
             private
