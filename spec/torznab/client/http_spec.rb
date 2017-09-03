@@ -1,5 +1,6 @@
 require 'spec_helper'
 require 'torznab/client/http'
+require 'torznab/client/errors/http_error'
 
 describe Torznab::Client::Http do
   describe '.get' do
@@ -17,7 +18,7 @@ describe Torznab::Client::Http do
 
     context 'with other scheme' do
       subject { Torznab::Client::Http.get 'httpz://test.net' }
-      it { expect { subject }.to raise_error Torznab::Client::Http::SchemeError, 'Scheme must be either http or https' }
+      it { expect { subject }.to raise_error Torznab::Client::Errors::HttpError, 'Scheme must be either http or https' }
     end
   end
 end

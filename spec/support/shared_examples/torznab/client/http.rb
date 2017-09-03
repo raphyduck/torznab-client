@@ -8,7 +8,7 @@ shared_examples 'a GET request' do
     context "with http status code #{http_status}" do
       before { stub_request(:get, url_stub_request).to_return status: http_status }
       it {
-        expect { subject }.to raise_error Torznab::Client::Http::HttpError,
+        expect { subject }.to raise_error Torznab::Client::Errors::HttpError,
                                           Regexp.new("Coudn't process response: #{http_status}")
       }
     end

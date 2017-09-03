@@ -1,3 +1,5 @@
+require 'torznab/client/errors/http_error'
+
 module Torznab
   module Client
     # HTTP calls handling
@@ -25,7 +27,9 @@ module Torznab
 
         def create_uri(url, params)
           uri = URI.parse url
-          raise SchemeError, 'Scheme must be either http or https' if uri.scheme != 'http' && uri.scheme != 'https'
+          if uri.scheme != 'http' && uri.scheme != 'https'
+            raise Torznab::Client::Errors::HttpError, 'Scheme must be either http or https'
+          end
           uri_set_query_from_params uri, params
           uri_path_remove_last_slash uri
           uri_path_add_api uri
@@ -57,18 +61,11 @@ module Torznab
 
         def process_response(response)
           unless response.is_a? Net::HTTPSuccess
-            raise HttpError, "Coudn't process response: #{response.code} #{response.class.to_s.sub! 'Net::HTTP', ''}"
+            raise Torznab::Client::Errors::HttpError,
+                  "Coudn't process response: #{response.code} #{response.class.to_s.sub! 'Net::HTTP', ''}"
           end
           response.body
         end
-      end
-
-      # Raised when a URL don't begin with http or https
-      class SchemeError < StandardError
-      end
-
-      # Raised when the status code returned by the response is not 2XX
-      class HttpError < StandardError
       end
     end
   end
