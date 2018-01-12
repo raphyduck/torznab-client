@@ -9,6 +9,9 @@ module Torznab
       module Mappers
         # SearchMode mapping
         module SearchModeMapper
+          XmlError = Torznab::Client::Errors::XmlError
+          private_constant :XmlError
+
           class << self
             # Map the data from a Nokogiri::XML::Element to a SearchMode object
             # corresponding of a search node of the caps xml
@@ -46,8 +49,6 @@ module Torznab
               attribute_supported_params = xml_element.attribute 'supportedParams'
               attribute_supported_params.nil? ? nil : attribute_supported_params.value.split(',')
             end
-
-            XmlError = Torznab::Client::Errors::XmlError
           end
         end
       end

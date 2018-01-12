@@ -4,11 +4,11 @@ require 'torznab/client/caps/mappers/search_modes_mapper'
 require 'torznab/client/caps/mappers/categories_mapper'
 
 describe Torznab::Client::Caps::Mappers::InstanceMapper do
-  XmlError = Torznab::Client::Errors::XmlError
-  SearchModes = Torznab::Client::Caps::SearchModes
-
   describe '.map' do
-    before { allow(Torznab::Client::Caps::Mappers::SearchModesMapper).to receive(:map).and_return SearchModes.new }
+    before do
+      search_modes = Torznab::Client::Caps::SearchModes.new
+      allow(Torznab::Client::Caps::Mappers::SearchModesMapper).to receive(:map).and_return search_modes
+    end
     before { allow(Torznab::Client::Caps::Mappers::CategoriesMapper).to receive(:map).and_return [] }
 
     let(:caps_instance) do
@@ -32,21 +32,21 @@ describe Torznab::Client::Caps::Mappers::InstanceMapper do
 
     context 'when provided object is not a Nokogiri::XML::Element' do
       let(:caps_xml) { [] }
-      it { expect { subject }.to raise_error XmlError, 'Provided object is not a Nokogiri::XML::Element' }
+      it { expect { subject }.to raise_error Torznab::Client::Errors::XmlError, 'Provided object is not a Nokogiri::XML::Element' }
     end
 
     context 'when the searching node is missing from the searching node' do
       let(:without_searching) { true }
-      it { expect { subject }.to raise_error XmlError, 'Searching node must be defined' }
+      it { expect { subject }.to raise_error Torznab::Client::Errors::XmlError, 'Searching node must be defined' }
     end
 
     context 'when the categories node is missing from the searching node' do
       let(:without_categories) { true }
-      it { expect { subject }.to raise_error XmlError, 'Categories node must be defined' }
+      it { expect { subject }.to raise_error Torznab::Client::Errors::XmlError, 'Categories node must be defined' }
     end
 
     context 'when all the required nodes are in the caps node', :end_with_subject do
-      it { expect(caps_instance).to receive(:search_modes=).with instance_of SearchModes }
+      it { expect(caps_instance).to receive(:search_modes=).with instance_of Torznab::Client::Caps::SearchModes }
       it { expect(caps_instance).to receive(:categories=).with instance_of Array }
     end
   end

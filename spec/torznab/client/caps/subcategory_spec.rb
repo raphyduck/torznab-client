@@ -2,8 +2,6 @@ require 'spec_helper'
 require 'torznab/client/caps/subcategory'
 
 describe Torznab::Client::Caps::Subcategory do
-  CapsError = Torznab::Client::Errors::CapsError
-
   let(:subcategory) do
     subcategory = Torznab::Client::Caps::Subcategory.new
     subcategory.id = id if defined? id

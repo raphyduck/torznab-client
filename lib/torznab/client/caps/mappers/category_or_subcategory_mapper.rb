@@ -6,6 +6,9 @@ module Torznab
       module Mappers
         # Category mapping
         module CategoryOrSubcategoryMapper
+          XmlError = Torznab::Client::Errors::XmlError
+          private_constant :XmlError
+
           private
 
           def map_id(xml_element)
@@ -20,8 +23,6 @@ module Torznab
             raise XmlError, 'Name attribute must be defined' if attribute_name.nil?
             attribute_name.value
           end
-
-          XmlError = Torznab::Client::Errors::XmlError
         end
       end
     end

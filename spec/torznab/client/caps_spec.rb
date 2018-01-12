@@ -1,11 +1,13 @@
-require 'torznab/client/caps'
 require 'spec_helper'
+require 'torznab/client/caps'
 
 describe Torznab::Client::Caps do
   describe '#fetch_caps_from_url' do
-    Instance = Torznab::Client::Caps::Instance
+    before do
+      instance = Torznab::Client::Caps::Instance.new
+      allow(Torznab::Client::Caps::Mappers::InstanceMapper).to receive(:map).and_return instance
+    end
 
-    before { allow(Torznab::Client::Caps::Mappers::InstanceMapper).to receive(:map).and_return Instance.new }
     let(:client) { Class.new { extend Torznab::Client::Caps } }
     let(:stub_query) do
       query = Torznab::Client::Caps::HTTP_CAPS_PARAMS.dup
@@ -32,8 +34,8 @@ describe Torznab::Client::Caps do
       context 'httpz' do
         let(:api_url) { 'httpz://test.net/torznab/api' }
         it do
-          expect { subject }.to raise_error CapsError, "Error while trying to get caps data from #{api_url}.\n"\
-                                                       "Error was 'Scheme must be either http or https'"
+          expect { subject }.to raise_error Torznab::Client::Errors::CapsError, "Error while trying to get caps data from #{api_url}.\n"\
+                                                                                "Error was 'Scheme must be either http or https'"
         end
       end
     end

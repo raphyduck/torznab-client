@@ -5,8 +5,8 @@ module Torznab
     # HTTP calls handling
     module Http
       class << self
-
-        API_PATH = '/api'.freeze # API Prefix for torznab
+        # API Prefix for torznab
+        API_PATH = '/api'.freeze
 
         # Do a GET request
         #

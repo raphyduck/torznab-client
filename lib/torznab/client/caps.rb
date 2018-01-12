@@ -9,7 +9,6 @@ module Torznab
     # @see https://github.com/Sonarr/Sonarr/wiki/Implementing-a-Torznab-indexer Newznab API Documentation
     # @see http://newznab.readthedocs.io/en/latest/misc/api/#caps Torznab API documentat
     module Caps
-
       attr_reader :caps
 
       # Default struct for caps fetching

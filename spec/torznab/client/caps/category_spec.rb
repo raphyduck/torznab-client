@@ -2,8 +2,6 @@ require 'spec_helper'
 require 'torznab/client/caps/category'
 
 describe Torznab::Client::Caps::Category do
-  CapsError = Torznab::Client::Errors::CapsError
-
   let(:subcategory) do
     subcategory = Torznab::Client::Caps::Category.new
     subcategory.id = id if defined? id
@@ -24,12 +22,12 @@ describe Torznab::Client::Caps::Category do
 
     context 'when it is not an array' do
       let(:subcategories) { '8040' }
-      it { expect { subject }.to raise_error CapsError, 'Subcategories must be an array' }
+      it { expect { subject }.to raise_error Torznab::Client::Errors::CapsError, 'Subcategories must be an array' }
     end
 
     context 'when it is not an array composed only with Subcategory objects' do
       let(:subcategories) { [Torznab::Client::Caps::Subcategory.new, 'a string'] }
-      it { expect { subject }.to raise_error CapsError, 'Subcategories must be composed only of Subcategory objects' }
+      it { expect { subject }.to raise_error Torznab::Client::Errors::CapsError, 'Subcategories must be composed only of Subcategory objects' }
     end
   end
 end

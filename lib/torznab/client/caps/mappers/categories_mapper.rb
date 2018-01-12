@@ -17,7 +17,7 @@ module Torznab
             # @raise [Torznab::Client::Errors::XmlError]
             def map(xml_element)
               unless xml_element.is_a? Nokogiri::XML::Element
-                raise XmlError, 'Provided object is not a Nokogiri::XML::Element'
+                raise Torznab::Client::Errors::XmlError, 'Provided object is not a Nokogiri::XML::Element'
               end
 
               map_categories xml_element

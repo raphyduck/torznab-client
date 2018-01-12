@@ -2,11 +2,11 @@ require 'spec_helper'
 require 'torznab/client/caps/mappers/categories_mapper'
 
 describe Torznab::Client::Caps::Mappers::CategoriesMapper do
-  XmlError = Torznab::Client::Errors::XmlError
-  Category = Torznab::Client::Caps::Category
-
   describe '.map' do
-    before { allow(Torznab::Client::Caps::Mappers::CategoryMapper).to receive(:map).and_return Category.new }
+    before do
+      category = Torznab::Client::Caps::Category
+      allow(Torznab::Client::Caps::Mappers::CategoryMapper).to receive(:map).and_return category
+    end
 
     let(:categories_xml) do
       Nokogiri::XML::Builder.new do |xml|
@@ -24,7 +24,7 @@ describe Torznab::Client::Caps::Mappers::CategoriesMapper do
 
     context 'when provided object is not a Nokogiri::XML::Element' do
       let(:categories_xml) { [] }
-      it { expect { subject }.to raise_error XmlError, 'Provided object is not a Nokogiri::XML::Element' }
+      it { expect { subject }.to raise_error Torznab::Client::Errors::XmlError, 'Provided object is not a Nokogiri::XML::Element' }
     end
 
     context 'when categories are empty' do
@@ -33,7 +33,7 @@ describe Torznab::Client::Caps::Mappers::CategoriesMapper do
     end
 
     context 'when categories have some children' do
-      it { is_expected.to match_array [Category, Category, Category] }
+      it { is_expected.to match_array [Torznab::Client::Caps::Category, Torznab::Client::Caps::Category, Torznab::Client::Caps::Category] }
     end
   end
 end

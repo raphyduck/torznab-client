@@ -2,8 +2,6 @@ require 'spec_helper'
 require 'torznab/client/caps/search_modes'
 
 describe Torznab::Client::Caps::SearchModes do
-  CapsError = Torznab::Client::Errors::CapsError
-
   let(:search_modes) do
     search_modes = Torznab::Client::Caps::SearchModes.new
     search_modes.search = search if defined? search
@@ -25,7 +23,7 @@ describe Torznab::Client::Caps::SearchModes do
         let(search_mode_name.to_sym) { 'a string' }
         it do
           message = 'Provided search mode must be an instance of Torznab::Client::Caps::SearchMode'
-          expect { subject }.to raise_error CapsError, message
+          expect { subject }.to raise_error Torznab::Client::Errors::CapsError, message
         end
       end
     end

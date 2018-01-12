@@ -29,26 +29,30 @@ module Torznab
 
         def type=(type)
           if type != 'search' && type != 'tv-search' && type != 'movie-search'
-            raise CapsError, 'Type must be a valid caps search mode'
+            raise Torznab::Client::Errors::CapsError, 'Type must be a valid caps search mode'
           end
+
           @type = type
         end
 
         def available=(available)
-          raise CapsError, 'Available must be a boolean' if !available.is_a?(TrueClass) && !available.is_a?(FalseClass)
+          if !available.is_a?(TrueClass) && !available.is_a?(FalseClass)
+            raise Torznab::Client::Errors::CapsError, 'Available must be a boolean'
+          end
+
           @available = available
         end
 
         def supported_params=(supported_params)
           @supported_params =
             case type
-            when 'search' then validate_supported_params supported_params,
-                                                         SEARCH_DEFAULT_SP, SEARCH_AUTHORIZED_SP
-            when 'tv-search' then validate_supported_params supported_params,
-                                                            TV_SEARCH_DEFAULT_SP, TV_SEARCH_AUTHORIZED_SP
-            when 'movie-search' then validate_supported_params supported_params,
-                                                               MOVIE_SEARCH_DEFAULT_SP, MOVIE_SEARCH_AUTHORIZED_SP
-            else raise CapsError, 'Type must be initialized before setting supported_params'
+            when 'search'
+              validate_supported_params supported_params, SEARCH_DEFAULT_SP, SEARCH_AUTHORIZED_SP
+            when 'tv-search'
+              validate_supported_params supported_params, TV_SEARCH_DEFAULT_SP, TV_SEARCH_AUTHORIZED_SP
+            when 'movie-search'
+              validate_supported_params supported_params, MOVIE_SEARCH_DEFAULT_SP, MOVIE_SEARCH_AUTHORIZED_SP
+            else raise Torznab::Client::Errors::CapsError, 'Type must be initialized before setting supported_params'
             end
         end
 
@@ -56,12 +60,16 @@ module Torznab
 
         def validate_supported_params(supported_params, default_params, allowed_params)
           return default_params if supported_params.nil?
-          raise CapsError, 'Supported params must either be an array or nil' unless supported_params.is_a? Array
-          raise CapsError, 'Supported params value is invalid' unless (supported_params - allowed_params).empty?
+
+          unless supported_params.is_a? Array
+            raise Torznab::Client::Errors::CapsError, 'Supported params must either be an array or nil'
+          end
+          unless (supported_params - allowed_params).empty?
+            raise Torznab::Client::Errors::CapsError, 'Supported params value is invalid'
+          end
+
           supported_params
         end
-
-        CapsError = Torznab::Client::Errors::CapsError
       end
     end
   end

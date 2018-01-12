@@ -11,24 +11,22 @@ module Torznab
         attr_reader :subcategories
 
         def id=(id)
-          raise CapsError, 'Id must be an integer' unless id.is_a? Integer
+          raise Torznab::Client::Errors::CapsError, 'Id must be an integer' unless id.is_a? Integer
           @id = id
         end
 
         def name=(name)
-          raise CapsError, 'Name must be a string' unless name.is_a? String
+          raise Torznab::Client::Errors::CapsError, 'Name must be a string' unless name.is_a? String
           @name = name
         end
 
         def subcategories=(subcategories)
-          raise CapsError, 'Subcategories must be an array' unless subcategories.is_a? Array
+          raise Torznab::Client::Errors::CapsError, 'Subcategories must be an array' unless subcategories.is_a? Array
           unless subcategories.reject { |element| element.is_a? Torznab::Client::Caps::Subcategory }.empty?
-            raise CapsError, 'Subcategories must be composed only of Subcategory objects'
+            raise Torznab::Client::Errors::CapsError, 'Subcategories must be composed only of Subcategory objects'
           end
           @subcategories = subcategories
         end
-
-        CapsError = Torznab::Client::Errors::CapsError
       end
     end
   end

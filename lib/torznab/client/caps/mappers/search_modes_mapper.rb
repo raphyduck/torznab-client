@@ -10,6 +10,9 @@ module Torznab
         # Searching node mapping
         module SearchModesMapper
           class << self
+            XmlError = Torznab::Client::Errors::XmlError
+            private_constant :XmlError
+
             # Map the data from a Nokogiri::XML::Element to a Searching object
             # corresponding of a searching node of the caps xml
             #
@@ -35,8 +38,6 @@ module Torznab
               raise XmlError, "Search mode with name #{xml_node_name} must exist" if search_mode_element.nil?
               SearchModeMapper.map search_mode_element
             end
-
-            XmlError = Torznab::Client::Errors::XmlError
           end
         end
       end

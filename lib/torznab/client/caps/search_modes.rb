@@ -29,10 +29,9 @@ module Torznab
 
         def validate_search_mode(search_mode)
           return if search_mode.is_a? Torznab::Client::Caps::SearchMode
-          raise CapsError, 'Provided search mode must be an instance of Torznab::Client::Caps::SearchMode'
+          raise Torznab::Client::Errors::CapsError,
+                'Provided search mode must be an instance of Torznab::Client::Caps::SearchMode'
         end
-
-        CapsError = Torznab::Client::Errors::CapsError
       end
     end
   end

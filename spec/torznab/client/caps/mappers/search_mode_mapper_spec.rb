@@ -2,8 +2,6 @@ require 'spec_helper'
 require 'torznab/client/caps/mappers/search_mode_mapper'
 
 describe Torznab::Client::Caps::Mappers::SearchModeMapper do
-  XmlError = Torznab::Client::Errors::XmlError
-
   describe '.map' do
     let(:search_mode) do
       search_mode = instance_double 'Torznab::Client::Caps::SearchMode'
@@ -24,7 +22,7 @@ describe Torznab::Client::Caps::Mappers::SearchModeMapper do
 
     context 'when provided object is not a Nokogiri::XML::Element' do
       let(:search_mode_xml) { [] }
-      it { expect { subject }.to raise_error XmlError, 'Provided object is not a Nokogiri::XML::Element' }
+      it { expect { subject }.to raise_error Torznab::Client::Errors::XmlError, 'Provided object is not a Nokogiri::XML::Element' }
     end
 
     context 'when the name in the xml node eq some value', :end_with_subject do
@@ -35,12 +33,12 @@ describe Torznab::Client::Caps::Mappers::SearchModeMapper do
     context 'when available attribute in the xml node' do
       context 'is not defined' do
         let(:search_mode_hash) { {} }
-        it { expect { subject }.to raise_error XmlError, 'Available attribute must be defined' }
+        it { expect { subject }.to raise_error Torznab::Client::Errors::XmlError, 'Available attribute must be defined' }
       end
 
       context 'is incorrect' do
         let(:search_mode_hash) { { 'available' => 'incorrect' } }
-        it { expect { subject }.to raise_error XmlError, 'Available attribute must be either yes or no' }
+        it { expect { subject }.to raise_error Torznab::Client::Errors::XmlError, 'Available attribute must be either yes or no' }
       end
 
       context 'eq yes', :end_with_subject do

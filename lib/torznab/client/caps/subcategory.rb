@@ -9,16 +9,14 @@ module Torznab
         attr_reader :name
 
         def id=(id)
-          raise CapsError, 'Id must be an integer' unless id.is_a? Integer
+          raise Torznab::Client::Errors::CapsError, 'Id must be an integer' unless id.is_a? Integer
           @id = id
         end
 
         def name=(name)
-          raise CapsError, 'Name must be a string' unless name.is_a? String
+          raise Torznab::Client::Errors::CapsError, 'Name must be a string' unless name.is_a? String
           @name = name
         end
-
-        CapsError = Torznab::Client::Errors::CapsError
       end
     end
   end

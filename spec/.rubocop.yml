@@ -1,0 +1,10 @@
+# Metrics
+
+Metrics/LineLength:
+  Max: 150
+
+Metrics/BlockLength:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false

@@ -2,10 +2,11 @@ require 'spec_helper'
 require 'torznab/client/caps/mappers/category_mapper'
 
 describe Torznab::Client::Caps::Mappers::CategoryMapper do
-  Subcategory = Torznab::Client::Caps::Subcategory
-
   describe '.map' do
-    before { allow(Torznab::Client::Caps::Mappers::SubcategoryMapper).to receive(:map).and_return Subcategory.new }
+    before do
+      subcategory = Torznab::Client::Caps::Subcategory.new
+      allow(Torznab::Client::Caps::Mappers::SubcategoryMapper).to receive(:map).and_return subcategory
+    end
 
     let(:category_or_subcategory_xml_builder) do
       Nokogiri::XML::Builder.new do |xml|

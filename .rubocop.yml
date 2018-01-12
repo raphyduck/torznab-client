@@ -12,32 +12,7 @@ AllCops:
 Metrics/LineLength:
   Max: 120
 
-Metrics/AbcSize:
-  Max: 18
-
-Metrics/MethodLength:
-  Max: 15
-
-Metrics/BlockLength:
-  Exclude:
-    - 'spec/**/*.rb'
-
-Metrics/MethodLength:
-  Exclude:
-    - 'spec/**/*.rb'
-
-# Layout
-
-Layout/EmptyLinesAroundClassBody:
-  Enabled: false
-
-Layout/EmptyLinesAroundModuleBody:
-  Enabled: false
-
 # Style
-
-Style/FrozenStringLiteralComment:
-  Enabled: false
 
 Style/RescueStandardError:
   Enabled: false

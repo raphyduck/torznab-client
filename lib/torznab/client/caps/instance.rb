@@ -11,14 +11,16 @@ module Torznab
         attr_reader :categories
 
         def search_modes=(search_modes)
-          raise CapsError, 'Search_modes must be a SearchModes instance' unless search_modes.is_a? SearchModes
+          unless search_modes.is_a? Torznab::Client::Caps::SearchModes
+            raise Torznab::Client::Errors::CapsError, 'Search_modes must be a SearchModes instance'
+          end
           @search_modes = search_modes
         end
 
         def categories=(categories)
-          raise CapsError, 'Categories must be an array' unless categories.is_a? Array
+          raise Torznab::Client::Errors::CapsError, 'Categories must be an array' unless categories.is_a? Array
           unless categories.reject { |category| category.is_a? Category }.empty?
-            raise CapsError, 'Categories must be composed only of instances of Category'
+            raise Torznab::Client::Errors::CapsError, 'Categories must be composed only of instances of Category'
           end
           @categories = categories
         end
