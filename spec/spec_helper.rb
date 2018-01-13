@@ -1,5 +1,8 @@
+require 'simplecov'
+SimpleCov.start
+
 require 'bundler/setup'
-require 'torznab/client'
+require 'webmock/rspec'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
@@ -8,4 +11,12 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
+
+  # After hooks
+  config.after(:example, :end_with_subject) do
+    subject
+  end
+
+  # Include all support files
+  Dir["./spec/support/**/*.rb"].sort.each { |f| require f }
 end
