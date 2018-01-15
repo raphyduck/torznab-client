@@ -1,5 +1,7 @@
 require 'torznab/client/errors/http_error'
 
+require 'net/http'
+
 module Torznab
   module Client
     # HTTP calls handling
@@ -18,7 +20,7 @@ module Torznab
         def get(url, params = nil)
           uri = create_uri url, params
           http = create_http uri
-          get_request = Net::HTTP::Get.new uri
+          get_request = ::Net::HTTP::Get.new uri
           response = http.request get_request
           process_response response
         end
@@ -51,7 +53,7 @@ module Torznab
         end
 
         def create_http(uri)
-          http = Net::HTTP.new uri.host, uri.port
+          http = ::Net::HTTP.new uri.host, uri.port
           if uri.scheme == 'https'
             http.use_ssl = true
             http.verify_mode = OpenSSL::SSL::VERIFY_NONE
