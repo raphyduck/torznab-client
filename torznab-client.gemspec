@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Nicolas MERELLI"]
   spec.email         = ["nicolas.merelli@gmail.com"]
 
-  spec.summary       = "Ruby client to Torznab APIs."
-  spec.description   = "Ruby client to Torznab APIs."
+  spec.summary       = "Ruby client for Torznab APIs. "
+  spec.description   = "Ruby client for Torznab APIs (like Jackett)."
   spec.homepage      = "https://github.com/PNSalocin/torznab-client"
   spec.license       = "MIT"
 
@@ -22,14 +22,15 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'nokogiri', '~> 1.8'
 
-  spec.add_development_dependency "bundler", "~> 1.14"
-  spec.add_development_dependency "rake", "~> 10.0"
+  spec.add_development_dependency "bundler"
+  spec.add_development_dependency "rake"
 
+  # CI
   spec.add_development_dependency "rubocop"
   spec.add_development_dependency "yard"
-  
-  # -- TESTS --
-  spec.add_development_dependency "rspec", "~> 3.0"
+
+  # Tests
+  spec.add_development_dependency "rspec"
   spec.add_development_dependency "webmock"
   spec.add_development_dependency "simplecov"
 end
