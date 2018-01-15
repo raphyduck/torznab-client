@@ -1,8 +1,10 @@
+[![Build Status](https://travis-ci.org/PNSalocin/torznab-client.svg?branch=master)](https://travis-ci.org/PNSalocin/torznab-client) [![Dependency Status](https://gemnasium.com/badges/github.com/PNSalocin/torznab-client.svg)](https://gemnasium.com/github.com/PNSalocin/torznab-client) [![Inline docs](http://inch-ci.org/github/PNSalocin/torznab-client.svg?branch=master&style=shields)](http://inch-ci.org/github/PNSalocin/torznab-client)
+
+[![Maintainability](https://api.codeclimate.com/v1/badges/0a637151ddbe5b59cdcb/maintainability)](https://codeclimate.com/github/PNSalocin/torznab-client/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/0a637151ddbe5b59cdcb/test_coverage)](https://codeclimate.com/github/PNSalocin/torznab-client/test_coverage)
+
 # Torznab::Client
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/torznab/client`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Ruby client for Torznab APIs. (like Jackett)
 
 ## Installation
 
@@ -34,8 +36,6 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/Nicolas MERELLI/torznab-client.
 
-
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
