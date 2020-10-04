@@ -1,6 +1,6 @@
-require 'torznab/client/caps/search_modes'
-require 'torznab/client/caps/category'
-require 'torznab/client/errors/caps_error'
+require_relative 'search_modes'
+require_relative 'category'
+require_relative '../errors/caps_error'
 
 module Torznab
   module Client

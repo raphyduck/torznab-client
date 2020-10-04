@@ -1,5 +1,5 @@
-require 'torznab/client/caps/mappers/category_mapper'
-require 'torznab/client/errors/xml_error'
+require_relative 'category_mapper'
+require_relative '../../errors/xml_error'
 require 'nokogiri'
 
 module Torznab

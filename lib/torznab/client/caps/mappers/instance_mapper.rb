@@ -1,7 +1,7 @@
-require 'torznab/client/caps/mappers/search_modes_mapper'
-require 'torznab/client/caps/mappers/categories_mapper'
-require 'torznab/client/caps/instance'
-require 'torznab/client/errors/xml_error'
+require_relative 'search_modes_mapper'
+require_relative 'categories_mapper'
+require_relative '../instance'
+require_relative '../../errors/xml_error'
 require 'nokogiri'
 
 module Torznab

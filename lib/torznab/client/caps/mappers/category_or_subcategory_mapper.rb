@@ -1,4 +1,4 @@
-require 'torznab/client/errors/xml_error'
+require_relative '../../errors/xml_error'
 
 module Torznab
   module Client

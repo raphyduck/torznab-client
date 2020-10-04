@@ -1,5 +1,5 @@
-require 'torznab/client/errors/caps_error'
-require 'torznab/client/caps/subcategory'
+require_relative '../errors/caps_error'
+require_relative 'subcategory'
 
 module Torznab
   module Client

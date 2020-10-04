@@ -1,6 +1,6 @@
-require 'torznab/client/caps/category'
-require 'torznab/client/caps/mappers/subcategory_mapper'
-require 'torznab/client/errors/xml_error'
+require_relative '../category'
+require_relative 'subcategory_mapper'
+require_relative '../../errors/xml_error'
 require 'nokogiri'
 
 module Torznab

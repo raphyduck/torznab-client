@@ -1,5 +1,5 @@
-require 'torznab/client/caps/mappers/instance_mapper'
-require 'torznab/client/http'
+require_relative 'caps/mappers/instance_mapper'
+require_relative 'http'
 require 'nokogiri'
 
 module Torznab
@@ -20,9 +20,9 @@ module Torznab
       # @param [String] api_url
       # @param [String] api_key
       # @raise [Torznab::Client::Errors::CapsError]
-      def fetch_caps_from_url(api_url, api_key = nil)
-        validate_url api_url
-        caps_xml = get_caps_xml api_url, api_key
+      def fetch_caps_from_url
+        validate_url Torznab::Client.api_url
+        caps_xml = get_caps_xml Torznab::Client.api_url
         nokogiri_xml_document = parse_xml caps_xml
         @caps = map_caps nokogiri_xml_document
       end
@@ -34,12 +34,11 @@ module Torznab
         raise Errors::CapsError, 'Provided url is not valid' unless api_url =~ /\A#{URI::DEFAULT_PARSER.make_regexp}\z/
       end
 
-      def get_caps_xml(api_url, api_key)
+      def get_caps_xml(api_url)
         params = HTTP_CAPS_PARAMS.dup
-        params['apikey'] = api_key if api_key
 
         begin
-          Torznab::Client::Http.get api_url, params
+          Torznab::Client::Http.get params
         rescue => error
           raise Errors::CapsError, "Error while trying to get caps data from #{api_url}.\nError was '#{error.message}'"
         end

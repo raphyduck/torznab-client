@@ -1,4 +1,4 @@
-require 'torznab/client/errors/http_error'
+require_relative 'errors/http_error'
 
 require 'net/http'
 
@@ -17,8 +17,8 @@ module Torznab
         # @return [String] Contents of the provided url
         # @raise [SchemeError] If the URL don't begin with http or https
         # @raise [HttpError] If the status code is not 2XX
-        def get(url, params = nil)
-          uri = create_uri url, params
+        def get(params = {})
+          uri = create_uri params.merge({'apikey' => Torznab::Client.api_key})
           http = create_http uri
           get_request = ::Net::HTTP::Get.new uri
           response = http.request get_request
@@ -27,8 +27,8 @@ module Torznab
 
         private
 
-        def create_uri(url, params)
-          uri = URI.parse url
+        def create_uri(params)
+          uri = URI.parse Torznab::Client.api_url
           if uri.scheme != 'http' && uri.scheme != 'https'
             raise Torznab::Client::Errors::HttpError, 'Scheme must be either http or https'
           end

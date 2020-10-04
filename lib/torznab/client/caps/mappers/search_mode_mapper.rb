@@ -1,5 +1,5 @@
-require 'torznab/client/caps/search_mode'
-require 'torznab/client/errors/xml_error'
+require_relative '../search_mode'
+require_relative '../../errors/xml_error'
 require 'nokogiri'
 
 module Torznab

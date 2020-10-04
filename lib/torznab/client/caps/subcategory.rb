@@ -1,4 +1,4 @@
-require 'torznab/client/errors/caps_error'
+require_relative '../errors/caps_error'
 
 module Torznab
   module Client

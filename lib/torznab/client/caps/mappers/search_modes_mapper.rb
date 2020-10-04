@@ -1,6 +1,6 @@
-require 'torznab/client/caps/search_modes'
-require 'torznab/client/caps/mappers/search_mode_mapper'
-require 'torznab/client/errors/xml_error'
+require_relative '../search_modes'
+require_relative 'search_mode_mapper'
+require_relative '../../errors/xml_error'
 require 'nokogiri'
 
 module Torznab
@@ -25,9 +25,12 @@ module Torznab
               end
 
               searching = SearchModes.new
-              searching.search = map_search xml_element, 'search'
-              searching.tv_search = map_search xml_element, 'tv-search'
-              searching.movie_search = map_search xml_element, 'movie-search'
+              xml_element.children.each do |el|
+                next if el.name == 'text'
+                attr_name = el.name.gsub('-', '_')
+                searching.class.module_eval { attr_accessor attr_name.to_sym }
+                eval("searching").method("#{attr_name}=").call map_search xml_element, el.name
+              end
               searching
             end
 
