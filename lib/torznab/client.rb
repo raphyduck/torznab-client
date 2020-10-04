@@ -25,7 +25,7 @@ module Torznab
 
       def get(params = {})
         begin
-          ::Http.get(params)
+          Torznab::Client::Http.get(params)
         rescue => error
           raise Errors::HttpError, "Error while trying to get http data from #{api_url}.\nError was '#{error.message}'"
         end
