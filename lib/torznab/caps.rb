@@ -3,26 +3,27 @@ require_relative 'http'
 require 'nokogiri'
 
 module Torznab
-  module Client
     # Capacities handling from the remote Torznab API
     #
     # @see https://github.com/Sonarr/Sonarr/wiki/Implementing-a-Torznab-indexer Newznab API Documentation
     # @see http://newznab.readthedocs.io/en/latest/misc/api/#caps Torznab API documentat
-    module Caps
-      attr_reader :caps
-
+    class Caps
       # Default struct for caps fetching
       HTTP_CAPS_PARAMS = { t: :caps }.freeze
+      attr_reader :caps
+
+      def initialize(http, api_url)
+        @http = http
+        @api_url = api_url
+        fetch_caps_from_url
+      end
 
       # Fetch and validate Torznab API capabilities from base url
       # Initialize caps attribute if the capabilities could be parsed successfully
-      #
-      # @param [String] api_url
-      # @param [String] api_key
-      # @raise [Torznab::Client::Errors::CapsError]
+      # @raise [Torznab::Errors::CapsError]
       def fetch_caps_from_url
-        validate_url Torznab::Client.api_url
-        caps_xml = get_caps_xml Torznab::Client.api_url
+        validate_url @api_url
+        caps_xml = get_caps_xml @api_url
         nokogiri_xml_document = parse_xml caps_xml
         @caps = map_caps nokogiri_xml_document
       end
@@ -38,7 +39,7 @@ module Torznab
         params = HTTP_CAPS_PARAMS.dup
 
         begin
-          Torznab::Client::Http.get params
+          @http.get params
         rescue => error
           raise Errors::CapsError, "Error while trying to get caps data from #{api_url}.\nError was '#{error.message}'"
         end
@@ -60,5 +61,4 @@ module Torznab
         Mappers::InstanceMapper.map caps_node
       end
     end
-  end
 end

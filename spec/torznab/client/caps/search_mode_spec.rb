@@ -1,9 +1,9 @@
 require 'spec_helper'
 require 'torznab/client/caps/search_mode'
 
-describe Torznab::Client::Caps::SearchMode do
+describe Torznab::Caps::SearchMode do
   let(:search_mode) do
-    search_mode = Torznab::Client::Caps::SearchMode.new
+    search_mode = Torznab::Caps::SearchMode.new
     search_mode.type = type if defined? type
     search_mode.available = available if defined? available
     search_mode.supported_params = supported_params if defined? supported_params
@@ -22,7 +22,7 @@ describe Torznab::Client::Caps::SearchMode do
 
     context 'is invalid' do
       let(:type) { 'other-search_mode' }
-      it { expect { subject }.to raise_error Torznab::Client::Errors::CapsError, 'Type must be a valid caps search mode' }
+      it { expect { subject }.to raise_error Torznab::Errors::CapsError, 'Type must be a valid caps search mode' }
     end
   end
 
@@ -38,7 +38,7 @@ describe Torznab::Client::Caps::SearchMode do
 
     context 'is invalid' do
       let(:available) { 'true' }
-      it { expect { subject }.to raise_error Torznab::Client::Errors::CapsError, 'Available must be a boolean' }
+      it { expect { subject }.to raise_error Torznab::Errors::CapsError, 'Available must be a boolean' }
     end
   end
 
@@ -47,7 +47,7 @@ describe Torznab::Client::Caps::SearchMode do
 
     context "when type isn't initialized" do
       let(:supported_params) { %w[q] }
-      it { expect { subject }.to raise_error Torznab::Client::Errors::CapsError, 'Type must be initialized before setting supported_params' }
+      it { expect { subject }.to raise_error Torznab::Errors::CapsError, 'Type must be initialized before setting supported_params' }
     end
 
     ['search', 'tv-search', 'movie-search'].each do |type|
@@ -72,12 +72,12 @@ describe Torznab::Client::Caps::SearchMode do
 
         context 'and supported_params is invalid with one invalid param' do
           let(:supported_params) { %w[invalid] }
-          it { expect { subject }.to raise_error Torznab::Client::Errors::CapsError, 'Supported params value is invalid' }
+          it { expect { subject }.to raise_error Torznab::Errors::CapsError, 'Supported params value is invalid' }
         end
 
         context 'and supported_params is invalid with one invalid param and one valid param' do
           let(:supported_params) { %w[q invalid] }
-          it { expect { subject }.to raise_error Torznab::Client::Errors::CapsError, 'Supported params value is invalid' }
+          it { expect { subject }.to raise_error Torznab::Errors::CapsError, 'Supported params value is invalid' }
         end
 
         context 'and supported_params is not defined' do

@@ -9,7 +9,7 @@ shared_examples 'a caps category or subcategory' do
 
     context 'when it is not an integer' do
       let(:id) { '8040' }
-      it { expect { subject }.to raise_error Torznab::Client::Errors::CapsError, 'Id must be an integer' }
+      it { expect { subject }.to raise_error Torznab::Errors::CapsError, 'Id must be an integer' }
     end
   end
 
@@ -23,7 +23,7 @@ shared_examples 'a caps category or subcategory' do
 
     context 'when it is not a string' do
       let(:name) { 8040 }
-      it { expect { subject }.to raise_error Torznab::Client::Errors::CapsError, 'Name must be a string' }
+      it { expect { subject }.to raise_error Torznab::Errors::CapsError, 'Name must be a string' }
     end
   end
 end

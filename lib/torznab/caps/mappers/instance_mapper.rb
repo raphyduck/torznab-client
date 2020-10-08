@@ -5,9 +5,8 @@ require_relative '../../errors/xml_error'
 require 'nokogiri'
 
 module Torznab
-  module Client
-    module Caps
-      module Mappers
+    class Caps
+      class Mappers
         # Instance of caps mapper
         module InstanceMapper
           class << self
@@ -15,14 +14,14 @@ module Torznab
             # corresponding of the caps node of the caps xml
             #
             # @param [Nokogiri::XML::Element] xml_element data from a caps node to map
-            # @return [Torznab::Client::Caps::Instance] Mapped Caps instance
-            # @raise [Torznab::Client::Errors::XmlError]
+            # @return [Torznab::Caps::Instance] Mapped Caps instance
+            # @raise [Torznab::Errors::XmlError]
             def map(xml_element)
               unless xml_element.is_a? Nokogiri::XML::Element
                 raise XmlError, 'Provided object is not a Nokogiri::XML::Element'
               end
 
-              caps = Torznab::Client::Caps::Instance.new
+              caps = Torznab::Caps::Instance.new
               caps.search_modes = map_search_modes xml_element
               caps.categories = map_categories xml_element
               caps
@@ -42,10 +41,9 @@ module Torznab
               CategoriesMapper.map node_categories
             end
 
-            XmlError = Torznab::Client::Errors::XmlError
+            XmlError = Torznab::Errors::XmlError
           end
         end
       end
-    end
   end
 end

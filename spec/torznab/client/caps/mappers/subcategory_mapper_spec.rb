@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'torznab/client/caps/mappers/subcategory_mapper'
 
-describe Torznab::Client::Caps::Mappers::SubcategoryMapper do
+describe Torznab::Caps::Mappers::SubcategoryMapper do
   describe '.map' do
     let(:category_or_subcategory_xml_builder) do
       Nokogiri::XML::Builder.new do |xml|
@@ -9,8 +9,8 @@ describe Torznab::Client::Caps::Mappers::SubcategoryMapper do
       end
     end
 
-    let(:category_or_subcategory_class) { Torznab::Client::Caps::Subcategory }
-    let(:category_or_subcategory_mapper_class) { Torznab::Client::Caps::Mappers::SubcategoryMapper }
+    let(:category_or_subcategory_class) { Torznab::Caps::Subcategory }
+    let(:category_or_subcategory_mapper_class) { Torznab::Caps::Mappers::SubcategoryMapper }
     include_examples 'a caps category or subcategory mapper'
 
     describe 'when the xml node is valid' do

@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'torznab/client/version'
+require 'torznab/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "torznab-client"
-  spec.version       = Torznab::Client::VERSION
+  spec.version       = Torznab::VERSION
   spec.authors       = ["Nicolas MERELLI"]
   spec.email         = ["nicolas.merelli@gmail.com"]
 
@@ -21,6 +21,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency 'nokogiri', '~> 1.8'
+  spec.add_dependency 'mechanize'
 
   spec.add_development_dependency "bundler"
   spec.add_development_dependency "rake"

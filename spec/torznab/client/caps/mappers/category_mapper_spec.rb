@@ -1,11 +1,11 @@
 require 'spec_helper'
 require 'torznab/client/caps/mappers/category_mapper'
 
-describe Torznab::Client::Caps::Mappers::CategoryMapper do
+describe Torznab::Caps::Mappers::CategoryMapper do
   describe '.map' do
     before do
-      subcategory = Torznab::Client::Caps::Subcategory.new
-      allow(Torznab::Client::Caps::Mappers::SubcategoryMapper).to receive(:map).and_return subcategory
+      subcategory = Torznab::Caps::Subcategory.new
+      allow(Torznab::Caps::Mappers::SubcategoryMapper).to receive(:map).and_return subcategory
     end
 
     let(:category_or_subcategory_xml_builder) do
@@ -18,8 +18,8 @@ describe Torznab::Client::Caps::Mappers::CategoryMapper do
       end
     end
 
-    let(:category_or_subcategory_class) { Torznab::Client::Caps::Category }
-    let(:category_or_subcategory_mapper_class) { Torznab::Client::Caps::Mappers::CategoryMapper }
+    let(:category_or_subcategory_class) { Torznab::Caps::Category }
+    let(:category_or_subcategory_mapper_class) { Torznab::Caps::Mappers::CategoryMapper }
     include_examples 'a caps category or subcategory mapper'
 
     describe 'when the xml node is valid' do

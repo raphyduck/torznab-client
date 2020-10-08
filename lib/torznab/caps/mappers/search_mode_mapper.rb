@@ -3,13 +3,12 @@ require_relative '../../errors/xml_error'
 require 'nokogiri'
 
 module Torznab
-  module Client
-    module Caps
+    class Caps
       # Caps objects mapping
-      module Mappers
+      class Mappers
         # SearchMode mapping
         module SearchModeMapper
-          XmlError = Torznab::Client::Errors::XmlError
+          XmlError = Torznab::Errors::XmlError
           private_constant :XmlError
 
           class << self
@@ -17,8 +16,8 @@ module Torznab
             # corresponding of a search node of the caps xml
             #
             # @param [Nokogiri::XML::Element] xml_element data from search node to map
-            # @return [Torznab::Client::Caps::SearchMode] Mapped search object
-            # @raise [Torznab::Client::Errors::XmlError]
+            # @return [Torznab::Caps::SearchMode] Mapped search object
+            # @raise [Torznab::Errors::XmlError]
             def map(xml_element)
               unless xml_element.is_a? Nokogiri::XML::Element
                 raise XmlError, 'Provided object is not a Nokogiri::XML::Element'
@@ -52,6 +51,5 @@ module Torznab
           end
         end
       end
-    end
   end
 end
