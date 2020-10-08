@@ -1,3 +1,3 @@
 module Torznab
-  VERSION = '0.1.1'.freeze #:nodoc:
+  VERSION = '0.2.0'.freeze #:nodoc:
 end
